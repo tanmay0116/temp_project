@@ -1,43 +1,49 @@
 @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@200;400;700&display=swap');
 
-*
+*{
+    box-sizing:border-box;
+}
+
+#logo
 {
-    box-sizing: border-box;
-    margin: 0;
-    padding: 0;
+    height: 20vh;
+    width: 20vw;
+    border-radius: 20px;
+    position: relative;
+    left: 8em;
 }
 :root{
-    --primary-color:black;
-    --secondary-color: rgba(0, 53, 128, 0.538);
+    --primary-color:#22254b;
+    --secondary-color: #373b69;
 }
+
+
 
 body{
     background-color: var(--primary-color);
     font-family: 'Poppins', sans-serif;
     margin: 0;
-    background-image: linear-gradient(#053f5e
-    ,#000000);
 }
+
+
 header{
     padding:1rem;
     display:flex;
-    justify-content: flex-end;
-    background-image: linear-gradient(#9cd9de
-    ,#5a92af);
+    justify-content: space-between;
+    background-color: var(--secondary-color);
 }
 
 .search{
-    /* background-color: transparent; */
+    background-color: transparent;
     border: 2px solid var(--primary-color);
     padding:0.5rem 1rem;
     border-radius: 50px;
     font-size: 1rem;
     color:#fff;
     font-family: inherit;
-    margin-right: 4rem;
-}
-::placeholder{
-    color:#000000;
+    position: relative;
+    top: 3em;
+    right: 3em;
 }
 
 .search:focus{
@@ -57,35 +63,44 @@ main{
 
 .movie {
     width: 300px;
+    height: 37em;
     margin: 1rem;
-    border:1px solid black;
-    border-radius: 2em;
-    /* border-radius: 3px; */
-    box-shadow: 0.2px 4px 5px rgba(0,0,0,0.1);
+    border-radius: 3px;
+    box-shadow: 0.2px 4px 5px black;
     background-color: var(--secondary-color);
     position:relative;
     overflow: hidden;
-    font-size:large;
+    border-radius: 3em;
     transition: transform .30s,box-shadow .30s;
-    
 }
 
+.movie:hover
+{
+    transform: translate(1%,-1%);
+    box-shadow: .5em .5em black; 
+}
 
 .movie img{
     width:100%;
 }
 
 .movie-info{
-    color:white;
+    color:#eee;
     display: flex;
+    flex-direction: column;
     align-items: center;
     justify-content: center;
     padding: 0.5rem 1rem 1rem;
     letter-spacing: 0.5px;
+    position: relative;
 }
 
 .movie-info h3{
     margin-top: 0;
+    font-weight: bold;
+    font-size: larger;
+    /* position: relative; */
+    /* left: 4em; */
 }
 
 .movie-info span{
@@ -93,19 +108,13 @@ main{
     padding: 0.25rem 0.5rem;
     border-radius: 3px;
     font-weight: bold;
+    font-size: larger;
+    color: #b892ff;
+    /* position: relative; */
+    /* top: 2em;
+    right: 4rem; */
 }
 
-.movie-info span.green{
-    color:lightgreen;
-}
-
-.movie-info span.orange{
-    color:orange;
-}
-
-.movie-info span.red{
-    color:red;
-}
 
 .overview{
     position:absolute;
@@ -115,180 +124,74 @@ main{
     background-color: #fff;
     padding: 1rem;
     max-height: 100%;
-    transform:translateY(101%);
+    transform:translateY(100%);
     transition:transform 0.3s ease-in;
 }
 
 .movie:hover .overview{
     transform:translateY(0);
 }
-.movie:hover
+
+#tags
 {
-    transform: translate(1%,-1%);
-    box-shadow: .5em .5em black;
-    /* background: linear-gradient(90deg, purple, green, hotpink); */
-    /* z-index: -1; */
-}
-#tags{
-    width:80%;
-    display:flex;
+    width: 85%;
+    display: flex;
     flex-wrap: wrap;
     justify-content: center;
     align-items: center;
-    margin: 10px auto;
+    margin: 1em auto;
+    background-image: linear-gradient(#468faf,#89c2d9);
+    border-radius: 5em;
+    margin-bottom: 3em;
 }
-
 .tag{
-    color:white;
-    padding:10px 20px;
+    color: white;
     background-color: orange;
-    border-radius: 50px;
-    margin:5px;
-    display:inline-block;
+    font-weight: bold;
+    font-size: larger;
+    box-shadow: 1px 1px 1px 1px black;
+    text-shadow: -1px 0 black, 0 2px black, 1px 0 black, 0 -1px black;
+    margin: 1em 1em;
+    padding: .5em .5em;
+    border-radius: 1em;
     cursor: pointer;
+    transition: transform .01s,box-shadow .3s;
+}
+.tag:hover{
+    transform: translate(1%,1%);
+    box-shadow: .25em .25em black;
 }
 
-.tag.highlight{
+.tag.highlight
+{
     background-color: red;
 }
-.no-results{
-    color:white;
-}
 
-.pagination{
-    display:flex;
-    margin:10px 30px;
+.pagination
+{
+    display: flex;
+    margin: 10px 30px;
     align-items: center;
     justify-content: center;
-    color:white;
+    color: white;
+}
+.page
+{
+    padding: 20px;
+    cursor: pointer;
+    font-weight: bold;
+    font-size: x-large;
+    letter-spacing: .05em;
 }
 
-.page{
-    padding:20px;
-    cursor:pointer;
+.page.disabled
+{
+    cursor: not-allowed;
+    color: grey;
 }
-
-.page.disabled{
-    cursor:not-allowed;
-    color:grey;
-}
-
-.current{
-    padding: 10px 20px;
+.current
+{
+    padding: 20px 30px;
     border-radius: 50%;
     border: 5px solid orange;
-    font-size: 20px;
-    font-weight: 600;
-}
-
-.know-more{
-    background-color: orange;
-    color:white;
-    font-size: 16px;
-    font-weight: bold;
-    border:0;
-    border-radius: 50px;
-    padding: 10px 20px;
-    margin-top: 5px;
-}
-/* The Overlay (background) */
-.overlay {
-    /* Height & width depends on how you want to reveal the overlay (see JS below) */   
-    height: 100%;
-    width: 0;
-    position: fixed; /* Stay in place */
-    z-index: 1; /* Sit on top */
-    left: 0;
-    top: 0;
-    background-color: rgb(0,0,0); /* Black fallback color */
-    background-color: rgba(0,0,0, 0.9); /* Black w/opacity */
-    overflow-x: hidden; /* Disable horizontal scroll */
-    transition: 0.5s; /* 0.5 second transition effect to slide in or slide down the overlay (height or width, depending on reveal) */
-  }
-  
-  /* Position the content inside the overlay */
-  .overlay-content {
-    position: relative;
-    top: 10%; /* 25% from the top */
-    width: 100%; /* 100% width */
-    text-align: center; /* Centered text/links */
-    margin-top: 30px; /* 30px top margin to avoid conflict with the close button on smaller screens */
-  }
-  
-  /* The navigation links inside the overlay */
-  .overlay a {
-    padding: 8px;
-    text-decoration: none;
-    font-size: 36px;
-    color: #818181;
-    display: block; /* Display block instead of inline */
-    transition: 0.3s; /* Transition effects on hover (color) */
-  }
-  
-  /* When you mouse over the navigation links, change their color */
-  .overlay a:hover, .overlay a:focus {
-    color: #f1f1f1;
-  }
-  
-  /* Position the close button (top right corner) */
-  .overlay .closebtn {
-    position: absolute;
-    top: 20px;
-    right: 45px;
-    font-size: 60px;
-  }
-  
-  /* When the height of the screen is less than 450 pixels, change the font-size of the links and position the close button again, so they don't overlap */
-  @media screen and (max-height: 450px) {
-    .overlay a {font-size: 20px}
-    .overlay .closebtn {
-      font-size: 40px;
-      top: 15px;
-      right: 35px;
-    }
-  }
-
-
-  .embed.hide{
-      display: none;
-  }
-
-  .embed.show{
-      display: inline-block;
-  }
-
-  .arrow{
-      position: absolute;
-      font-size: 40px;
-  }
-
-  .arrow.left-arrow{
-      top:50%;
-      left:5%;
-      transform: translateY(-50%);
-  }
-
-  
-  .arrow.right-arrow{
-    top:50%;
-    transform: translateY(-50%);
-    right:5%;
-}
-
-.dots{
-    margin-top: 30px;
-}
-
-.dots .dot {
-    padding: 5px 15px;
-    border-radius: 50%;
-    border: 5px solid var(--secondary-color);
-    color: white;
-    font-size: 20px;
-    font-weight: 600;
-    margin: 5px;
-}
-
-.dots .dot.active{
-    border-color: orange;
 }
