@@ -135,7 +135,7 @@ function showMovies(data) {
     main.innerHTML = '';
 
     data.forEach(movie => {
-        const {title, poster_path, vote_average, overview} = movie;
+        const {title, poster_path, vote_average, overview,id} = movie;
         const movieEl = document.createElement('div');
         movieEl.classList.add('movie');
         movieEl.innerHTML = `
@@ -149,14 +149,49 @@ function showMovies(data) {
             <div class="overview">
 
                 <h3>Overview</h3>
-                ${overview?overview:'The overview is provided by the API. You may get the movie description online.'};
+                ${overview?overview:'The overview is not provided by the API. You may get the movie description online.'};
+                <br>
+                <button class="know-more" id="${id}">Know More</button>
             </div>
         
         `
  
         main.appendChild(movieEl);
+        document.getElementById(id).addEventListener('click',()=>{
+            console.log(id);
+            openNav(movie);
+        })
     });
 };
+
+const overlayContent=document.getElementById('overlay-content');
+/* Open when someone clicks on the span element */
+function openNav(movie) {
+    let id=movie.id;
+    fetch(BASE_URL+'/movie/'+id+'/videos?'+API_KEY).then(res=>res.json()).then(videoData=>{
+        console.log(videoData);
+        if(videoData)
+        document.getElementById("myNav").style.width = "100%";
+        if(videoData.results.length>0)
+        {
+            var code='';
+                let {key,name,site}=videoData.results[0];
+                if(site=='YouTube')
+                {code+=`
+                <iframe width="560" height="315" src="https://www.youtube.com/embed/${key}" title="${name}" class="embed hide" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe> `;}
+            overlayContent.innerHTML=code;
+        }
+        else{
+            overlayContent.innerHTML=`<h1 style="color:white; position:relative;top:4em;">No Results Found</h1>`;
+        }
+    });
+  }
+  
+  /* Close when someone clicks on the "x" symbol inside the overlay */
+  function closeNav() {
+    document.getElementById("myNav").style.width = "0%";
+  }
+  
 
 form.addEventListener('submit', (e) => {
     e.preventDefault();
